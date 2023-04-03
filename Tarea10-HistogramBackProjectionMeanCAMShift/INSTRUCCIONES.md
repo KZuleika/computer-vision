@@ -1,0 +1,5 @@
+# Histogram Backprojection, MeanShift y CAMShift
+
+1. Usa un objeto fácilmente reconocible como un peluche o un juguete, y utilízalo para calcular el histograma de referencia para el algoritmo de Histogram Backprojection (cv.CalcBackProject(Imagen, BackProject, Histograma).  Usando la cámara y el algoritmo de Meanshift, encuentra y sigue el objeto, encerrándolo en un recuadro. 
+2. Repite el punto anterior, usando el algoritmo de CAMShift en lugar de MeanShift.
+3. Crea una imagen de referencia de tu rostro, que solo contenga la parte de la frente, ojos, nariz y boca; utilízala para calcular el histograma de referencia para los dos programas anteriores. Prueba el programa con otras personas (usando la misma referencia de histograma de tu rostro), reporta que tan bien detecta otros rostros de diferente edad, genero y tono de piel.
