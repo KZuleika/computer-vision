@@ -5,7 +5,7 @@ import numpy as np
 
 def ecualizacion_histograma_gray(img_gray):
     out = img_gray.copy()
-    hist, edge = np.histogram(img_gray.flatten(), 256, [0,256]) 
+    hist, _ = np.histogram(img_gray.flatten(), 256, [0,256]) 
     #print(edge)
     histacum = hist.cumsum()
     #print(histacum)
@@ -20,10 +20,9 @@ def ecualizacion_histograma_gray(img_gray):
     #cv2.waitKey(0)
     return out
 
-def ecualizacion_histograma_hls(img_rgb):
-    out = img.copy()
-    #print(img[:,:,0].shape)
-    out[:,:,2] = ecualizacion_histograma_gray(img_rgb[:,:,2])
+def ecualizacion_histograma_hls(img_hls, channel):
+    out = img_hls.copy()
+    out[:,:,channel] = ecualizacion_histograma_gray(out[:,:,channel])
     return out
 
 
@@ -34,8 +33,8 @@ for i in range(len(imgtxt)):
     img = cv2.imread(imgtxt[i])
     img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
     img_hls = cv2.cvtColor(img, cv2.COLOR_RGB2HLS)
-    img_ecualizada = ecualizacion_histograma_hls(img_hls)
-    img_ecualizada = cv2.cvtColor(img, cv2.COLOR_HLS2RGB)
+    img_ecualizada = ecualizacion_histograma_hls(img_hls,1)
+    img_ecualizada = cv2.cvtColor(img_ecualizada, cv2.COLOR_HLS2RGB)
 
 
     plt.subplot(221),plt.imshow(img)
