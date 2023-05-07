@@ -1,4 +1,5 @@
 from fingerfunctions import *
+from paintfunctions import  *
 import cv2
 import mediapipe as mp
 import numpy as np
@@ -7,7 +8,7 @@ import math
 cap = cv2.VideoCapture(0)
 
 cv2.namedWindow('Dibujo')
-imgPizarra = cv2.imread('pizarra1.jpg')
+imgPizarra = cv2.imread('pizarra.jpg')
 
 # Dedos en MediaPipe
 thumb_points = [1,2,4] 
@@ -37,6 +38,8 @@ with mp_hands.Hands(
         dim = (width, height)
         imgPizarra = cv2.resize(imgPizarra,dim, interpolation = cv2.INTER_AREA)
        
+#_________________ Imagen de la camara ________________________
+        
         image = cv2.flip(image,1)
         alto, ancho, _ = image.shape
         results = hands.process(image)
@@ -46,14 +49,24 @@ with mp_hands.Hands(
                                       palm_points, fingertips_points, finger_base_points,
                                       alto, ancho)
            
+
             if not False in (fingers == PIEDRA):
                 cv2.putText(image, 'PIEDRA', (10,30), 1, 1.5, (0,0,180),2)
             elif not False in (fingers == PAPEL):
                 cv2.putText(image, 'PAPEL', (10,30), 1, 1.5, (0,0,180),2)
             elif not False in (fingers == CLIC):
                 cv2.putText(image, 'TIJERA', (10,30), 1, 1.5, (0,0,180),2)
-
-            
+                tip_position = clic_position(results,fingertips_points, alto, ancho)
+                Xm , Ym = tip_position[0], tip_position[1]
+                if contador1 == 0:
+                    Xm_before.clear()
+                    Ym_before.clear()
+                    Xm_before.append(Xm)
+                    Ym_before.append(Ym)
+                    Xm_before.append(Xm)
+                    Ym_before.append(Ym)
+                #imgPizarra = paint_point(tip_position[0], tip_position[1], imgPizarra, (0,0,255), 5)
+                
 
         cv2.imshow('MediaPipe Hands', image)
         cv2.imshow('Dibujo', imgPizarra)
