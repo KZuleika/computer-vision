@@ -1,0 +1,3 @@
+1. Correr el ejemplo de detección de rostros del tutorial de OpenCV  en https://docs.opencv.org/3.4/db/d28/tutorial_cascade_classifier.html 
+
+2. Crea tu propio clasificador para detector algún objeto que tengas en casa.  Entrénalo con al menos 100 imágenes positivas y 200 negativas. Básate del video Como crear tu detector de objetos con haar cascade, en la sección de archivos. Baja el programa para entrenar tu clasificador en: https://amin-ahmadi.com/cascade-trainer-gui/
