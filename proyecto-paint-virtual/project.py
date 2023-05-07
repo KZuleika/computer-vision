@@ -9,7 +9,7 @@ mydraw = realTimeDraw(color=(0,255,255), thickness=5)
 cap = cv2.VideoCapture(0)
 
 cv2.namedWindow('Dibujo')
-imgPizarra = cv2.imread('pizarra.jpg')
+imgPizarra = cv2.imread('blank.jpg')
 
 # Dedos en MediaPipe
 thumb_points = [1,2,4] 
@@ -63,8 +63,8 @@ with mp_hands.Hands(
                 (x,y) = tip_position
                 imgPizarra = mydraw.paint_line(imgPizarra, x, y)
                 #imgPizarra = paint_point(tip_position[0], tip_position[1], imgPizarra, (0,0,255), 5)
-            else:
-                mydraw.firstPoint = True    
+#            else:
+#                mydraw.firstPoint = True    
 
         cv2.imshow('MediaPipe Hands', image)
         cv2.imshow('Dibujo', imgPizarra)
