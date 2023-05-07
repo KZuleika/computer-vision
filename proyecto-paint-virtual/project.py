@@ -53,15 +53,18 @@ with mp_hands.Hands(
 
             if not False in (fingers == PIEDRA):
                 cv2.putText(image, 'PIEDRA', (10,30), 1, 1.5, (0,0,180),2)
+                mydraw.firstPoint = True  
             elif not False in (fingers == PAPEL):
                 cv2.putText(image, 'PAPEL', (10,30), 1, 1.5, (0,0,180),2)
+                mydraw.firstPoint = True
             elif not False in (fingers == CLIC):
                 cv2.putText(image, 'TIJERA', (10,30), 1, 1.5, (0,0,180),2)
                 tip_position = clic_position(results,fingertips_points, alto, ancho)
                 (x,y) = tip_position
                 imgPizarra = mydraw.paint_line(imgPizarra, x, y)
                 #imgPizarra = paint_point(tip_position[0], tip_position[1], imgPizarra, (0,0,255), 5)
-                
+            else:
+                mydraw.firstPoint = True    
 
         cv2.imshow('MediaPipe Hands', image)
         cv2.imshow('Dibujo', imgPizarra)
