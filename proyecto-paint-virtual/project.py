@@ -5,6 +5,7 @@ import mediapipe as mp
 import numpy as np
 import math
 
+mydraw = realTimeDraw(color=(0,255,255), thickness=5)
 cap = cv2.VideoCapture(0)
 
 cv2.namedWindow('Dibujo')
@@ -48,7 +49,7 @@ with mp_hands.Hands(
             fingers = fingers_up_down(results, thumb_points, 
                                       palm_points, fingertips_points, finger_base_points,
                                       alto, ancho)
-           
+
 
             if not False in (fingers == PIEDRA):
                 cv2.putText(image, 'PIEDRA', (10,30), 1, 1.5, (0,0,180),2)
@@ -57,14 +58,8 @@ with mp_hands.Hands(
             elif not False in (fingers == CLIC):
                 cv2.putText(image, 'TIJERA', (10,30), 1, 1.5, (0,0,180),2)
                 tip_position = clic_position(results,fingertips_points, alto, ancho)
-                Xm , Ym = tip_position[0], tip_position[1]
-                if contador1 == 0:
-                    Xm_before.clear()
-                    Ym_before.clear()
-                    Xm_before.append(Xm)
-                    Ym_before.append(Ym)
-                    Xm_before.append(Xm)
-                    Ym_before.append(Ym)
+                (x,y) = tip_position
+                imgPizarra = mydraw.paint_line(imgPizarra, x, y)
                 #imgPizarra = paint_point(tip_position[0], tip_position[1], imgPizarra, (0,0,255), 5)
                 
 

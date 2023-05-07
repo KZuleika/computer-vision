@@ -20,7 +20,7 @@ def palm_centroid(coordinates_list):
 
 def clic_position(hand_results, fingertips_points, alto, ancho):
     coordenadas_puntadedo = []
-    clic_points = [fingertips_points[0]]
+    clic_points = [fingertips_points[0],fingertips_points[1]]
 
     for hand_landmarks in hand_results.multi_hand_landmarks:
         for index in clic_points:
@@ -31,7 +31,7 @@ def clic_position(hand_results, fingertips_points, alto, ancho):
     coordenadas_puntadedo = np.array(coordenadas_puntadedo)
     centroid = np.mean(coordenadas_puntadedo, axis=0)
     centroid = int(centroid[0]), int(centroid[1])
-    print(centroid)
+    #print(centroid)
     return centroid
 
 def fingers_up_down(hand_results, thumb_points, palm_points, fingertips_points, finger_base_points, alto, ancho):
