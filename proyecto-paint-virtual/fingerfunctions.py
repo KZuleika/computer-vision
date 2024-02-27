@@ -20,7 +20,8 @@ def palm_centroid(coordinates_list):
 
 def clic_position(hand_results, fingertips_points, alto, ancho):
     coordenadas_puntadedo = []
-    clic_points = [fingertips_points[0],fingertips_points[1]]
+    #clic_points = [fingertips_points[0],fingertips_points[1]]
+    clic_points = [fingertips_points[0]]
 
     for hand_landmarks in hand_results.multi_hand_landmarks:
         for index in clic_points:

@@ -9,7 +9,7 @@ mydraw = realTimeDraw(color=(0,255,255), thickness=5)
 cap = cv2.VideoCapture(0)
 
 cv2.namedWindow('Dibujo')
-imgPizarra = cv2.imread('blank.jpg')
+imgPizarra = cv2.imread('tabla.jpg')
 
 # Dedos en MediaPipe
 thumb_points = [1,2,4] 
@@ -49,8 +49,9 @@ with mp_hands.Hands(
             fingers = fingers_up_down(results, thumb_points, 
                                       palm_points, fingertips_points, finger_base_points,
                                       alto, ancho)
-
-
+            tip_position = clic_position(results,fingertips_points, alto, ancho)
+            (x,y) = tip_position
+            cv2.circle(image, (x,y), 4, (0,0,255))
             if not False in (fingers == PIEDRA):
                 cv2.putText(image, 'PIEDRA', (10,30), 1, 1.5, (0,0,180),2)
                 mydraw.firstPoint = True  
@@ -59,8 +60,6 @@ with mp_hands.Hands(
                 mydraw.firstPoint = True
             elif not False in (fingers == CLIC):
                 cv2.putText(image, 'TIJERA', (10,30), 1, 1.5, (0,0,180),2)
-                tip_position = clic_position(results,fingertips_points, alto, ancho)
-                (x,y) = tip_position
                 imgPizarra = mydraw.paint_line(imgPizarra, x, y)
                 #imgPizarra = paint_point(tip_position[0], tip_position[1], imgPizarra, (0,0,255), 5)
 #            else:
